@@ -25,7 +25,7 @@ public class PageLabelMacro implements Macro {
         List<ContentEntityObject> pages = (List<ContentEntityObject>) labelManager.getCurrentContentForLabel(new Label(stringStringMap.get("label")));
         StringBuilder sB = new StringBuilder("<div>");
         for(ContentEntityObject page : pages){
-            sB.append(page.getTitle()).append("<br>");
+            sB.append(page.getTitle()).append(page.isDeleted()?" (deleted)":"").append("<br>");
         }
         sB.append("</div>");
 
