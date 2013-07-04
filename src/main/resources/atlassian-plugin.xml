@@ -1,0 +1,37 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="label-manager"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="label-manager-resources" name="label-manager Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="label-manager.css" location="/css/label-manager.css"/>
+        <resource type="download" name="label-manager.js" location="/js/label-manager.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>label-manager</context>
+    </web-resource>
+
+    <xhtml-macro name='page-report' class="bug.confluence.PageLabelMacro" key="page-report-macro">
+        <parameters>
+            <parameter name='label' type='string' required='true' />
+        </parameters>
+    </xhtml-macro>
+    <!-- publish our component -->
+    <component key="myPluginComponent" class="bug.confluence.MyPluginComponentImpl" public="true">
+        <interface>bug.confluence.MyPluginComponent</interface>
+    </component>
+    
+    <!-- import from the product container -->
+    <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
+    
+</atlassian-plugin>
